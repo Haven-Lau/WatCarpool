@@ -4,16 +4,16 @@ $(document).ready(function() {
         defaultDate: moment()
     });
     $('form').on('submit', function() {
-		valueOne = $('input[name="from"]').val();
-    	valueTwo = $('input[name="to"]').val();
-    	console.log(valueOne, valueTwo)
+		var from = $('input[name="from"]').val();
+    	var to = $('input[name="to"]').val();
+    	console.log(from, to)
 
     	$.ajax({
     		type: 'POST',
     		url: '/',
-    		data: {'first': valueOne, 'second': valueTwo},
+    		data: {'fromdddd': from, 'to': to},
     		success: function(result) {
-    			console.log(result);
+    			console.log('success');
     		},
     		error: function(error) {
     			console.log(error);
