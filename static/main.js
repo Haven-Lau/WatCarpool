@@ -11,9 +11,9 @@ $(document).ready(function() {
     	$.ajax({
     		type: 'POST',
     		url: '/',
-    		data: {'fromdddd': from, 'to': to},
+    		data: {'from': from, 'to': to},
     		success: function(result) {
-    			console.log('success');
+    			console.log(result);
     		},
     		error: function(error) {
     			console.log(error);
