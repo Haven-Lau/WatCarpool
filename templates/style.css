@@ -14,6 +14,7 @@
     box-sizing: border-box;
     border-radius: 2px;
     background-clip: padding-box;
+    float: right
 }
 .card span.card-title {
     color: #fff;
