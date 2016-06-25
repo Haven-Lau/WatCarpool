@@ -9,6 +9,5 @@ Run the server
 ```shell
 cd WatCarpool
 pip install flask
-pip install json
 python app.py
 ```
