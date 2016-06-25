@@ -21,11 +21,11 @@
                 <ul class="nav navbar-nav">
                     <form class="navbar-form navbar-left" role="form" method="post" onsubmit="return false;">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="From" id="from" required>
+                            <input type="text" class="form-control" placeholder="From" id="origin-search" required>
                             <button type="button" class="btn btn-default navbar-btn" id="reverse-loc">
                                 <span class="glyphicon glyphicon-resize-horizontal"></span>
                             </button>
-                            <input type="text" class="form-control" placeholder="To" id="to" required>
+                            <input type="text" class="form-control" placeholder="To" id="destination-search" required>
                             <div class="form-group">
                                 <select class="form-control">
                                     <option>Leave Now </option>
@@ -40,7 +40,7 @@
                                 </span>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-default" id="get-post">Search</button>
+                        <button type="submit" class="btn btn-default" id="get-carpool">Search</button>
                         <a href="#myModal" class="btn btn-default" data-toggle="modal">
                             <span class="glyphicon glyphicon-plus"></span>
                         </a>
@@ -113,7 +113,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary" id="post-carpool">Submit</button>
                             </div>
                         </form>
                     </div>
