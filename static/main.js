@@ -87,7 +87,7 @@ $(document).ready(function() {
 
     function parseDate(s) {
         var date = moment(s);
-        return date.format('YYYY-MM-DD HH-mm-ss')
+        return date.format('YYYY-MM-DD HH:mm:ss')
     }
 
 });
