@@ -2,13 +2,20 @@ $(document).ready(function() {
     console.log('ready');
 
     // Setup datatimepicker
-	$('#datetimepicker').datetimepicker({
+	$('#datetimepicker1').datetimepicker({
         defaultDate: moment(),
-        format: 'h:mm A ddd YYYY-MM-DD'
+    });
+
+    $('#date-of-carpool').datetimepicker({
+        defaultDate: moment(),
     });
 
     // Not allowed to edit the content at the datatimepicker input field
     $('#date-time').on('keydown', function() {
+        return false;
+    })
+
+    $('#date-of-carpool').on('keydown', function() {
         return false;
     })
     
@@ -21,17 +28,17 @@ $(document).ready(function() {
     })
 
     // Ajax call to get post results
-    $('form').on('submit', function() {
-		var from = $('input[id="from"]').val();
-    	var to = $('input[id="to"]').val();
-        var time = $('input[id="date-time"]').val();
+    $('#get-carpool').on('click', function() {
+		var originSearch = $('input[id="origin-search"]').val();
+    	var destinationSearch = $('input[id="destination-search"]').val();
+        var dateSearch = parseDate($('input[id="date-time"]').val());
         
-    	console.log('Getting data: ' + from + ' to ' + to + ' at ' + time)
+    	console.log('Getting data: ' + originSearch + ' to ' + destinationSearch + ' at ' + dateSearch);
 
     	$.ajax({
     		type: 'GET',
     		url: '/api/get-carpool-list',
-    		data: {'from': from, 'to': to},
+    		data: {'from': originSearch, 'to': destinationSearch},
     		success: function(result) {
     			console.log(result);
     		},
@@ -39,5 +46,48 @@ $(document).ready(function() {
     			console.log(error);
     		}
     	})
-    })
+    });
+
+        // Ajax call to post carpool
+    $('#post-carpool').on('click', function() {
+        var originCity = $('input[id="origin-city"]').val();
+        var destinationCity = $('input[id="destination-city"]').val();
+        var dateOfCarpool = parseDate($('input[id="date-of-carpool"]').val());
+        var now = parseDate(new Date());
+        var price = $('input[id="price"]').val();
+        var availableSpot = $('input[id="available-spots"]').val();
+        var pickUpLocation = $('input[id="pick-up-location"]').val();
+        var dropOffLocation = $('input[id="drop-off-location"]').val();
+        var phoneNumber = $('input[id="phone-number"]').val();
+
+        console.log(originCity, destinationCity, dateOfCarpool, price, availableSpot, pickUpLocation, dropOffLocation, phoneNumber, now);
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/post-carpool',
+            data: {
+                'phone-number': phoneNumber,
+                'num-spots': availableSpot,
+                'origin': originCity,
+                'destination': destinationCity,
+                'publish-date-time': now,
+                'carpool-date-time': dateOfCarpool,
+                'pick-up': pickUpLocation,
+                'drop-off': dropOffLocation,
+                'price': price
+            },
+            success: function(result) {
+                console.log('success');
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    });
+
+    function parseDate(s) {
+        var date = moment(s);
+        return date.format('YYYY-MM-DD HH:mm:ss')
+    }
+
 });

@@ -13,7 +13,6 @@
         <script src="../static/main.js"></script>
     </head>
     <body>
-
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -22,11 +21,11 @@
                 <ul class="nav navbar-nav">
                     <form class="navbar-form navbar-left" role="form" method="post" onsubmit="return false;">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="From" id="from" required>
+                            <input type="text" class="form-control" placeholder="From" id="origin-search" required>
                             <button type="button" class="btn btn-default navbar-btn" id="reverse-loc">
                                 <span class="glyphicon glyphicon-resize-horizontal"></span>
                             </button>
-                            <input type="text" class="form-control" placeholder="To" id="to" required>
+                            <input type="text" class="form-control" placeholder="To" id="destination-search" required>
                             <div class="form-group">
                                 <select class="form-control">
                                     <option>Leave Now </option>
@@ -34,25 +33,93 @@
                                     <option>Arrive By </option>
                                 </select>
                             </div>
-                            <div class="input-group date" id="datetimepicker">
+                            <div class="input-group date" id="datetimepicker1">
                                 <input type='text' class="form-control" id="date-time">
                                 <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-default">Search</button>
-                        <button type="button" class="btn btn-default navbar-btn" id="add-post">
+                        <button type="submit" class="btn btn-default" id="get-carpool">Search</button>
+                        <a href="#myModal" class="btn btn-default" data-toggle="modal">
                             <span class="glyphicon glyphicon-plus"></span>
-                        </button>
+                        </a>
                     </form>
                 </ul>
             </div>
         </nav>
-        
+
         <div class="container">
             <h3>Basic Navbar Example</h3>
             <p>A navigation bar is a navigation header that is placed at the top of the page.</p>
         </div>
+
+        <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Create a Carpool Post</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" method="post" onsubmit="return false;">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Origin City</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="origin-city" placeholder="Waterloo" value="Waterloo" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Destination City</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="destination-city" placeholder="Markham" value="Markham" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Date of Carpool</label>
+                                <div class="col-md-6">
+                                    <input type='text' class="form-control" id="date-of-carpool" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Price (CAD)</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="price" placeholder="15" pattern="[0-9]+" value="15" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Available Spots</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="available-spots" placeholder="4" pattern="[0-9]+" value="4"required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Pick Up Location</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="pick-up-location" placeholder="Burger King" value="Burger King" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Drop Off Location</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="drop-off-location" placeholder="Pacific Mall" value="Pacific Mall" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Phone Number</label>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="phone-number" placeholder="6471234567" pattern="[0-9]{10}" value="6471234567" required/>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+                                <button type="submit" class="btn btn-primary" id="post-carpool">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>

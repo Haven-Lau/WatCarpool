@@ -22,15 +22,17 @@ def index():
 
 @app.route('/api/post-carpool', methods=['POST'])
 def post_carpool():
-    phone_number = request.args.get('phone-number').strip()
-    num_spots = int(request.args.get('num-spots'))
-    origin = request.args.get('origin').strip().lower()
-    destination = request.args.get('destination').strip().lower()
-    publish_date_time = request.args.get('publish-date-time').strip()
-    carpool_date_time = request.args.get('carpool-date-time').strip()
-    pick_up = request.args.get('pick-up').strip().lower()
-    drop_off = request.args.get('drop-off').strip().lower()
-    price = request.args.get('price')
+    phone_number = request.form.get('phone-number').strip()
+    num_spots = int(request.form.get('num-spots').strip())
+    origin = request.form.get('origin').strip().lower()
+    destination = request.form.get('destination').strip().lower()
+    publish_date_time = request.form.get('publish-date-time').strip()
+    carpool_date_time = request.form.get('carpool-date-time').strip()
+    pick_up = request.form.get('pick-up').strip().lower()
+    drop_off = request.form.get('drop-off').strip().lower()
+    price = int(request.form.get('price'))
+
+    print phone_number, num_spots, origin, destination, publish_date_time, carpool_date_time, pick_up, drop_off, drop_off, price
 
     db = get_db()
     cur = db.execute('INSERT INTO post (phone_number,num_spots,origin,destination,publish_date_time,'
@@ -38,7 +40,7 @@ def post_carpool():
                      'VALUES (\'%s\',%d,\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',%d);'
                      % (phone_number, num_spots, origin, destination, publish_date_time, carpool_date_time,
                         pick_up, drop_off, price))
-
+    db.commit()
     return "PLACEHOLDER"
 
 
@@ -98,4 +100,4 @@ def connect_db():
 
 
 if __name__ == '__main__':
-    app.run(debug=True,port=8000)
+    app.run(debug=True, port=8000)
