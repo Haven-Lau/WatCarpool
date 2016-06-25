@@ -26,8 +26,12 @@ def index():
         cur = db.execute('SELECT * FROM post WHERE origin = \'%s\' AND destination = \'%s\'' % (from_loc, to_loc))
 
         data = cur.fetchall()
-        json_return = dict(zip(['id','origin','destination'], data[0]))
-        print json_return
+
+        json_return = {'result': []}
+
+        for x in data:
+            json_return['result'].append(dict(zip(['id','origin','destination'], x)))
+
         return json.dumps(json_return)
     return render_template('index.html')
 
@@ -67,4 +71,4 @@ def connect_db():
 
 
 if __name__ == '__main__':
-    app.run(port=8000)
+    app.run(debug=True,port=8000)
