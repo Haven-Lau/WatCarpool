@@ -10,7 +10,22 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA25memOqlz1X9ziSlvuaYy8hnp8r2WhpE&callback=initMap"
+        async defer></script>
         <script src="../static/main.js"></script>
+        <script src="../static/maps.js"></script>
+        <style>
+          html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+          }
+          #map {
+            height: 83vh;
+            width: 50vw;
+            float:right;
+          }
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-default">
@@ -48,6 +63,8 @@
                 </ul>
             </div>
         </nav>
+
+        <div id="map"></div>
 
         <div class="container">
             <h3>Basic Navbar Example</h3>

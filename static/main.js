@@ -89,5 +89,4 @@ $(document).ready(function() {
         var date = moment(s);
         return date.format('YYYY-MM-DD HH:mm:ss')
     }
-
 });
