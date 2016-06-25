@@ -22,7 +22,7 @@ def index():
 
 @app.route('/api/get-carpool-list', methods=['GET'])
 def get_post():
-    print request.args.get('from'), request.args.get('to')
+    print request.args.get('from'), request.args.get('to'),
 
     from_loc = request.args.get('from').strip().lower()
     to_loc = request.args.get('to').strip().lower()
@@ -35,7 +35,9 @@ def get_post():
     # Create JSON return file
     json_return = {'result': []}
     for x in data:
-        json_return['result'].append(dict(zip(['id','origin','destination'], x)))
+        json_return['result'].append(dict(zip(['post_id', 'phone_number', 'num_spots', 'origin', 'destination',
+                                               'publish_date_time', 'carpool_date_time', 'pick_up', 'drop_off',
+                                               'price'], x)))
     return json.dumps(json_return)
 
 @app.after_request
