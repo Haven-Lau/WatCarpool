@@ -1,8 +1,8 @@
 import sqlite3 as sql
 
 mock_data = (
-	('waterloo', 'markham'),
-	('waterloo', 'mississauga')
+	('Waterloo', 'Markham'),
+	('Waterloo', 'Mississauga')
 )
 
 with sql.connect('../post.db') as con:

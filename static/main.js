@@ -29,8 +29,8 @@ $(document).ready(function() {
     	console.log('Getting data: ' + from + ' to ' + to + ' at ' + time)
 
     	$.ajax({
-    		type: 'POST',
-    		url: '/',
+    		type: 'GET',
+    		url: '/api/get-carpool-list',
     		data: {'from': from, 'to': to},
     		success: function(result) {
     			console.log(result);

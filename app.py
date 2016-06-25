@@ -15,26 +15,28 @@ app.config.update(dict(
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
-    if request.method == 'POST':
-        print 'Going from %s to %s' % (request.form['from'], request.form['to'])
-        from_loc = request.form['from'].lower().strip()
-        to_loc = request.form['to'].lower().strip()
-
-        db = get_db()
-        cur = db.execute('SELECT * FROM post WHERE origin = \'%s\' AND destination = \'%s\'' % (from_loc, to_loc))
-
-        data = cur.fetchall()
-
-        json_return = {'result': []}
-
-        for x in data:
-            json_return['result'].append(dict(zip(['id','origin','destination'], x)))
-
-        return json.dumps(json_return)
     return render_template('index.html')
 
+
+@app.route('/api/get-carpool-list', methods=['GET'])
+def get_post():
+    print request.args.get('from'), request.args.get('to')
+
+    from_loc = request.args.get('from').strip().lower()
+    to_loc = request.args.get('to').strip().lower()
+
+    db = get_db()
+    cur = db.execute('SELECT * FROM post WHERE lower(origin) = \'%s\' AND lower(destination) = \'%s\'' % (from_loc, to_loc))
+
+    data = cur.fetchall()
+
+    # Create JSON return file
+    json_return = {'result': []}
+    for x in data:
+        json_return['result'].append(dict(zip(['id','origin','destination'], x)))
+    return json.dumps(json_return)
 
 @app.after_request
 def add_header(response):
