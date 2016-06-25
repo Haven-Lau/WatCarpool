@@ -20,9 +20,31 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/api/post-carpool', methods=['POST'])
+def post_carpool():
+    phone_number = request.args.get('phone-number').strip()
+    num_spots = int(request.args.get('num-spots'))
+    origin = request.args.get('origin').strip().lower()
+    destination = request.args.get('destination').strip().lower()
+    publish_date_time = request.args.get('publish-date-time').strip()
+    carpool_date_time = request.args.get('carpool-date-time').strip()
+    pick_up = request.args.get('pick-up').strip().lower()
+    drop_off = request.args.get('drop-off').strip().lower()
+    price = request.args.get('price')
+
+    db = get_db()
+    cur = db.execute('INSERT INTO post (phone_number,num_spots,origin,destination,publish_date_time,'
+                     'carpool_date_time,pick_up,drop_off,price) '
+                     'VALUES (\'%s\',%d,\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',%d);'
+                     % (phone_number, num_spots, origin, destination, publish_date_time, carpool_date_time,
+                        pick_up, drop_off, price))
+
+    return "PLACEHOLDER"
+
+
 @app.route('/api/get-carpool-list', methods=['GET'])
-def get_post():
-    print request.args.get('from'), request.args.get('to'),
+def get_carpool_list():
+    print request.args.get('from'), request.args.get('to')
 
     from_loc = request.args.get('from').strip().lower()
     to_loc = request.args.get('to').strip().lower()
@@ -39,6 +61,7 @@ def get_post():
                                                'publish_date_time', 'carpool_date_time', 'pick_up', 'drop_off',
                                                'price'], x)))
     return json.dumps(json_return)
+
 
 @app.after_request
 def add_header(response):
