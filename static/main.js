@@ -2,13 +2,20 @@ $(document).ready(function() {
     console.log('ready');
 
     // Setup datatimepicker
-	$('#datetimepicker').datetimepicker({
+	$('#datetimepicker1').datetimepicker({
         defaultDate: moment(),
-        format: 'h:mm A ddd YYYY-MM-DD'
+    });
+
+    $('#date-of-carpool').datetimepicker({
+        defaultDate: moment(),
     });
 
     // Not allowed to edit the content at the datatimepicker input field
     $('#date-time').on('keydown', function() {
+        return false;
+    })
+
+    $('#date-of-carpool').on('keydown', function() {
         return false;
     })
     
@@ -21,7 +28,8 @@ $(document).ready(function() {
     })
 
     // Ajax call to get post results
-    $('form').on('submit', function() {
+    $('#get-post').on('click', function() {
+        console.log('click');
 		var from = $('input[id="from"]').val();
     	var to = $('input[id="to"]').val();
         var time = $('input[id="date-time"]').val();
