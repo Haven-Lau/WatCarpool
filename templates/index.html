@@ -18,7 +18,7 @@
         <script src="../static/ng-scrollable.min.js"></script>
         <script src="../static/main.js"></script>
     </head>
-    <body>
+    <body  ng-app='myApp'>
 
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -27,8 +27,8 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <form class="navbar-form navbar-left" role="form" method="post" onsubmit="return false;">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="From" id="origin-search" required>
+                        <div ng-controller="controller" class="form-group" >
+                            <input ng-bind = "origin" type="text" class="form-control" placeholder="From" id="origin-search" required>
                             <button type="button" class="btn btn-default navbar-btn" id="reverse-loc">
                                 <span class="glyphicon glyphicon-resize-horizontal"></span>
                             </button>
@@ -57,10 +57,10 @@
         </nav>
 
         <!-- Listings Div -->
-        <div ng-app='myApp' ng-controller="controller" class = "listings">
-            <div ng-scrollable  style="width: 33vw; height: 90vh; ">
+        <div ng-controller="controller" class = "listings">
+            <div style="width: 33vw; height: 90vh; ">
 
-                <div ng-repeat ="info in list" class="container" style = "width: 33vw">
+                <div  ng-repeat="origin in lists" class="container" style = "width: 33vw">
                     <div class="row">
                         <!-- Card Projects -->
                         <div>
@@ -71,7 +71,7 @@
                                 </div>
 
                                 <div class="card-content">
-                                    <p>{{info}}</p>
+                                    <p>{{origin | angular}}</p>
                                 </div>
 
                                 <div class="card-action">

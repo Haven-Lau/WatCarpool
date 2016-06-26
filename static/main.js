@@ -95,5 +95,8 @@ $(document).ready(function() {
 
 var myApp = angular.module('myApp', ['ngScrollable']);
 myApp.controller('controller', function($scope) {
-    $scope.list = global;
+    $scope.list = [1,2,3,4];
+    $scope.click = function() {
+        console.log('hi');
+    }
 });
