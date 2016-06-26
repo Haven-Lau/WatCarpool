@@ -47,14 +47,14 @@
                             </button>
                             <input type="text" class="form-control" placeholder="To" id="destination-search" required>
                             <div class="form-group">
-                                <select class="form-control">
-                                    <option>Leave Now </option>
-                                    <option>Depart At </option>
-                                    <option>Arrive By </option>
+                                <select class="form-control" id="time-change">
+                                    <option selected="selected">Leave Now</option>
+                                    <option>Depart At</option>
+                                    <option>Arrive By</option>
                                 </select>
                             </div>
                             <div class="input-group date" id="datetimepicker1">
-                                <input type='text' class="form-control" id="date-time">
+                                <input type='text' class="form-control" id="date-time" readonly>
                                 <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
