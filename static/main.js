@@ -18,16 +18,16 @@ $(document).ready(function() {
     $('#date-of-carpool').on('keydown', function() {
         return false;
     })
-    
-    // Reverse location
-    $('#reverse-loc').on('click', function()  {
-        var from = $('input[id="origin-search"]').val();
-        var to = $('input[id="destination-search"]').val();
-        $('#origin-search').val(to);
-        $('#destination-search').val(from);
-    })
 
-        // Ajax call to post carpool
+    // Reverse location
+    //$('#reverse-loc').on('click', function()  {
+    //    var from = $('input[id="origin-search"]').val();
+    //    var to = $('input[id="destination-search"]').val();
+    //    $('#origin-search').val(to);
+    //    $('#destination-search').val(from);
+    //})
+
+    // Ajax call to post carpool
     $('#post-carpool').on('click', function() {
         var originCity = $('input[id="origin-city"]').val();
         var destinationCity = $('input[id="destination-city"]').val();
@@ -67,10 +67,15 @@ $(document).ready(function() {
 
 var myApp = angular.module('myApp', ['ngScrollable']);
 myApp.controller('controller', function($scope, $http) {
-    $scope.getCarpool = function() {
+    $scope.getCarpool = function(reverse) {
+        if (reverse) {
+            var from = $('input[id="origin-search"]').val();
+            var to = $('input[id="destination-search"]').val();
+            $('#origin-search').val(to);
+            $('#destination-search').val(from);
+        }
         var originSearch = $('input[id="origin-search"]').val();
         var destinationSearch = $('input[id="destination-search"]').val();
-        console.log(originSearch, destinationSearch);
         $http.get('/api/get-carpool-list', {
                 params: {
                     'from': originSearch,
@@ -80,7 +85,7 @@ myApp.controller('controller', function($scope, $http) {
             .then(function(response) {
                 $scope.lists = response.data.result;
             });
-    };
+    };    
 });
 
 function parseDate(s) {
