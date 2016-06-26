@@ -19,6 +19,15 @@ $(document).ready(function() {
         return false;
     })
 
+    $('#time-change').change(function() {
+        console.log('asd');
+        if ($('#time-change').val() != 'Leave Now') {
+            $('#date-time').prop('readonly', false);
+        } else {
+            $('#date-time').prop('readonly', true);
+        }
+    });
+
     // Reverse location
     //$('#reverse-loc').on('click', function()  {
     //    var from = $('input[id="origin-search"]').val();
