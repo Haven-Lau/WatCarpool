@@ -27,28 +27,6 @@ $(document).ready(function() {
         $('#to').val(from);
     })
 
-    // Ajax call to get post results
-    $('#get-carpool').on('click', function() {
-		var originSearch = $('input[id="origin-search"]').val();
-    	var destinationSearch = $('input[id="destination-search"]').val();
-        var dateSearch = parseDate($('input[id="date-time"]').val());
-        
-    	console.log('Getting data: ' + originSearch + ' to ' + destinationSearch + ' at ' + dateSearch);
-
-    	$.ajax({
-    		type: 'GET',
-    		url: '/api/get-carpool-list',
-    		data: {'from': originSearch, 'to': destinationSearch},
-    		success: function(result) {
-                global = result;
-    			console.log(result);
-    		},
-    		error: function(error) {
-    			console.log(error);
-    		}
-    	})
-    });
-
         // Ajax call to post carpool
     $('#post-carpool').on('click', function() {
         var originCity = $('input[id="origin-city"]').val();
@@ -86,17 +64,27 @@ $(document).ready(function() {
         })
     });
 
-    function parseDate(s) {
-        var date = moment(s);
-        return date.format('YYYY-MM-DD HH:mm:ss')
-    }
-
 });
 
 var myApp = angular.module('myApp', ['ngScrollable']);
-myApp.controller('controller', function($scope) {
-    $scope.list = [1,2,3,4];
-    $scope.click = function() {
-        console.log('hi');
-    }
+myApp.controller('controller', function($scope, $http) {
+    $scope.getCarpool = function() {
+        var originSearch = $('input[id="origin-search"]').val();
+        var destinationSearch = $('input[id="destination-search"]').val();
+        console.log(originSearch, destinationSearch);
+        $http.get('/api/get-carpool-list', {
+                params: {
+                    'from': originSearch,
+                    'to': destinationSearch
+                },
+            })
+            .then(function(response) {
+                $scope.lists = response.data.result;
+            });
+    };
 });
+
+function parseDate(s) {
+    var date = moment(s);
+    return date.format('YYYY-MM-DD HH:mm:ss')
+}
