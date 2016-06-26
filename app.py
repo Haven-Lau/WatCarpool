@@ -34,7 +34,7 @@ def post_carpool():
     drop_off = request.form.get('drop-off').strip().lower()
     price = int(request.form.get('price'))
 
-    print phone_number, num_spots, origin, destination, publish_date_time, carpool_date_time, pick_up, drop_off, drop_off, price
+    print phone_number, num_spots, origin, destination, publish_date_time, carpool_date_time, pick_up, drop_off, price
 
     db = get_db()
     cur = db.execute('INSERT INTO post (phone_number,num_spots,origin,destination,publish_date_time,'

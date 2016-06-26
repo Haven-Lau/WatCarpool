@@ -21,10 +21,10 @@ $(document).ready(function() {
     
     // Reverse location
     $('#reverse-loc').on('click', function()  {
-        var from = $('input[id="from"]').val();
-        var to = $('input[id="to"]').val();
-        $('#from').val(to);
-        $('#to').val(from);
+        var from = $('input[id="origin-search"]').val();
+        var to = $('input[id="destination-search"]').val();
+        $('#origin-search').val(to);
+        $('#destination-search').val(from);
     })
 
         // Ajax call to post carpool
@@ -63,7 +63,6 @@ $(document).ready(function() {
             }
         })
     });
-
 });
 
 var myApp = angular.module('myApp', ['ngScrollable']);
