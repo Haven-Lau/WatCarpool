@@ -13,8 +13,8 @@
         <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
 
 
-        <link rel="stylesheet" type="text/css" href="../templates/style.css">
-        <link rel="stylesheet" type="text/css" href="../templates/ng-scrollable.css">
+        <link rel="stylesheet" type="text/css" href="../static/style.css">
+        <link rel="stylesheet" type="text/css" href="../static/ng-scrollable.css">
         <script src="../static/ng-scrollable.min.js"></script>
         <script src="../static/main.js"></script>
     </head>
@@ -57,10 +57,10 @@
         </nav>
 
         <!-- Listings Div -->
-        <div ng-app='myApp' class = "listings" >
-            <div ng-scrollable style="width: 33vw; height: 90vh; ">
+        <div ng-app='myApp' ng-controller="controller" class = "listings">
+            <div ng-scrollable  style="width: 33vw; height: 90vh; ">
 
-                <div class="container" style = "width: 33vw">
+                <div ng-repeat ="info in list" class="container" style = "width: 33vw">
                     <div class="row">
                         <!-- Card Projects -->
                         <div>
@@ -71,7 +71,7 @@
                                 </div>
 
                                 <div class="card-content">
-                                    <p>Cards for display in portfolio style material design by Google.</p>
+                                    <p>{{info}}</p>
                                 </div>
 
                                 <div class="card-action">
@@ -82,50 +82,6 @@
                     </div>
                 </div>
 
-
-                <div class="container" style = "width: 33vw">
-                    <div class="row">
-                        <!-- Card Projects -->
-                        <div>
-                            <div class="card">
-                                <div class="card-image">
-                                    <img class="img-responsive" src="http://material-design.storage.googleapis.com/publish/v_2/material_ext_publish/0Bx4BSt6jniD7TDlCYzRROE84YWM/materialdesign_introduction.png">
-                                    <span class="card-title">Material Cards</span>
-                                </div>
-
-                                <div class="card-content">
-                                    <p>Cards for display in portfolio style material design by Google.</p>
-                                </div>
-
-                                <div class="card-action">
-                                    <a href="#" target="new_blank">Contact</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container" style = "width: 33vw">
-                    <div class="row">
-                        <!-- Card Projects -->
-                        <div>
-                            <div class="card">
-                                <div class="card-image">
-                                    <img class="img-responsive" src="http://material-design.storage.googleapis.com/publish/v_2/material_ext_publish/0Bx4BSt6jniD7TDlCYzRROE84YWM/materialdesign_introduction.png">
-                                    <span class="card-title">Material Cards</span>
-                                </div>
-
-                                <div class="card-content">
-                                    <p>Cards for display in portfolio style material design by Google.</p>
-                                </div>
-
-                                <div class="card-action">
-                                    <a href="#" target="new_blank">Contact</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </div>

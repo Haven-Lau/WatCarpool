@@ -40,6 +40,7 @@ $(document).ready(function() {
     		url: '/api/get-carpool-list',
     		data: {'from': originSearch, 'to': destinationSearch},
     		success: function(result) {
+                global = result;
     			console.log(result);
     		},
     		error: function(error) {
@@ -93,3 +94,6 @@ $(document).ready(function() {
 });
 
 var myApp = angular.module('myApp', ['ngScrollable']);
+myApp.controller('controller', function($scope) {
+    $scope.list = global;
+});
