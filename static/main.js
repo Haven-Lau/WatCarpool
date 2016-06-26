@@ -18,37 +18,16 @@ $(document).ready(function() {
     $('#date-of-carpool').on('keydown', function() {
         return false;
     })
-    
+
     // Reverse location
-    $('#reverse-loc').on('click', function()  {
-        var from = $('input[id="origin-search"]').val();
-        var to = $('input[id="destination-search"]').val();
-        $('#origin-search').val(to);
-        $('#destination-search').val(from);
-    })
+    //$('#reverse-loc').on('click', function()  {
+    //    var from = $('input[id="origin-search"]').val();
+    //    var to = $('input[id="destination-search"]').val();
+    //    $('#origin-search').val(to);
+    //    $('#destination-search').val(from);
+    //})
 
-    // Ajax call to get post results
-    $('#get-carpool').on('click', function() {
-		var originSearch = $('input[id="origin-search"]').val();
-    	var destinationSearch = $('input[id="destination-search"]').val();
-        var dateSearch = parseDate($('input[id="date-time"]').val());
-        
-    	console.log('Getting data: ' + originSearch + ' to ' + destinationSearch + ' at ' + dateSearch);
-
-    	$.ajax({
-    		type: 'GET',
-    		url: '/api/get-carpool-list',
-    		data: {'from': originSearch, 'to': destinationSearch},
-    		success: function(result) {
-    			console.log(result);
-    		},
-    		error: function(error) {
-    			console.log(error);
-    		}
-    	})
-    });
-
-        // Ajax call to post carpool
+    // Ajax call to post carpool
     $('#post-carpool').on('click', function() {
         var originCity = $('input[id="origin-city"]').val();
         var destinationCity = $('input[id="destination-city"]').val();
@@ -84,9 +63,32 @@ $(document).ready(function() {
             }
         })
     });
-
-    function parseDate(s) {
-        var date = moment(s);
-        return date.format('YYYY-MM-DD HH:mm:ss')
-    }
 });
+
+var myApp = angular.module('myApp', ['ngScrollable']);
+myApp.controller('controller', function($scope, $http) {
+    $scope.getCarpool = function(reverse) {
+        if (reverse) {
+            var from = $('input[id="origin-search"]').val();
+            var to = $('input[id="destination-search"]').val();
+            $('#origin-search').val(to);
+            $('#destination-search').val(from);
+        }
+        var originSearch = $('input[id="origin-search"]').val();
+        var destinationSearch = $('input[id="destination-search"]').val();
+        $http.get('/api/get-carpool-list', {
+                params: {
+                    'from': originSearch,
+                    'to': destinationSearch
+                },
+            })
+            .then(function(response) {
+                $scope.lists = response.data.result;
+            });
+    };    
+});
+
+function parseDate(s) {
+    var date = moment(s);
+    return date.format('YYYY-MM-DD HH:mm:ss')
+}
