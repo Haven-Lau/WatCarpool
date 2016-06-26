@@ -20,7 +20,7 @@ def location_scan(message):
 		message = message.split(' To ')
 	else:
 		print 'COULD NOT FIND IDENTIFIER, RETURN'
-		return False
+		return {'From':None, 'To':None}		
 	
 	if ' From ' in message[0]:
 		from_message = message[0].split(' From ')[1]
@@ -36,7 +36,6 @@ def location_scan(message):
 	to_message = find_loc(to_message)
 	if to_message == None:
 		print 'COULD NOT IDENTIFY LOCATIONS, RETURN'
-		return False		
+		return {'From':None, 'To':None}		
 
-	print 'From: '+str(from_message)
-	print 'To: '+str(to_message)
+	return {'From':str(from_message), 'To':str(to_message)}
