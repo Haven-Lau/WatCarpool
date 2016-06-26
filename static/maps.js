@@ -23,14 +23,12 @@ function initMap() {
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     directionsService.route({
         origin: document.getElementById('origin-search').value.toLowerCase().includes('waterloo') ? 
-            '150 University Ave West, Waterloo' : document.getElementById('origin-search').value,
+            '150 University Ave West, Waterloo' : document.getElementById('origin-search').value + ' canada',
         destination: document.getElementById('destination-search').value + ' canada',
         travelMode: google.maps.TravelMode.DRIVING
     }, function(response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
-        } else {
-            window.alert('Directions request failed due to ' + status);
         }
     });
 }

@@ -1,8 +1,10 @@
 import sqlite3, os, json
+from flask_triangle import Triangle
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template, flash
 
 # Create application and db config
 app = Flask(__name__)
+Triangle(app)
 app.config.from_object(__name__)
 
 # Load default config and override config from an environment variable
